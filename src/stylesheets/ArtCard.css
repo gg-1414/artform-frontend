@@ -1,0 +1,18 @@
+.art-card {
+  display: inline-block;
+  margin: 25px;
+  /* transition-duration: 4s; */
+}
+
+.art-card:nth-child(1) {
+  margin-top: 15px;
+}
+
+.art-card img {
+  width: auto;
+  height: 230px;
+  position: relative;
+  border: 10px solid white;
+  box-shadow: 0px 0px 17px #bebebe, 0 0 9px #3d3d3d;
+  z-index: -1;
+}

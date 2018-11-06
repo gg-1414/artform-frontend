@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { withRouter, Route } from 'react-router-dom'
+// import { connect, mapStateToProps } from 'react-redux'
 import './App.css';
+import Nav from './components/Nav'
+import ArtsContainer from './containers/ArtsContainer'
+import SignUp from './components/SignUp'
+import LogIn from './components/LogIn'
 
 class App extends Component {
+  state = {
+    signUp: false
+  }
+
+  signUpHandler = (e) => {
+    this.setState({signUp: true})
+  }
+
   render() {
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Nav />
+        <Route path= '/login' component={LogIn} />
+        <Route path= '/signup' component={SignUp} />
+        <Route exact path= '/index' component={ArtsContainer} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

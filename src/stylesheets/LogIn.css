@@ -1,0 +1,13 @@
+#login {
+  text-align: center;
+}
+
+#login h1 {
+  margin: 20px;
+  cursor: pointer;
+}
+
+#login input {
+  font-size: 15px;
+  padding: 5px;
+}

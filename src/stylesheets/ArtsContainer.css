@@ -1,0 +1,9 @@
+#arts-container {
+  display: inline-block;
+  height: 580px;
+  /* width: 77%; */
+  width: 91%;
+  float: right;
+  overflow: scroll;
+  padding: 15px;
+}

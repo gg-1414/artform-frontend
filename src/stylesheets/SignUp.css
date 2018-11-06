@@ -1,0 +1,25 @@
+#signup {
+  width: 100%;
+  height: 600px;
+  transform: translateX(100%);
+  transition: transform 400ms ease-in;
+}
+
+#signup div {
+  width: 45%;
+  display: inline-block;
+}
+
+#signup.slideIn {
+  transform: translateX(0);
+}
+
+#signup.slideOut {
+  transform: translateX(100%);
+}
+
+#signup input {
+  float: left;
+  font-size: 15px;
+  /* width: 20%; */
+}

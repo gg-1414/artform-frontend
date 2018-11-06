@@ -1,0 +1,28 @@
+header {
+  padding: 10px;
+  /* margin-bottom: 10px; */
+  position: relative;
+  background: #fff;
+  width: 99%;
+  border-bottom: 1px solid black;
+}
+
+nav {
+  font-size: 18px;
+}
+
+h1 {
+  display: inline;
+}
+
+nav span {
+  float: right;
+  margin-top: 5px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+nav span a {
+  text-decoration: none;
+  color: black;
+}
