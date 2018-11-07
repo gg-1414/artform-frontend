@@ -6,14 +6,13 @@ import { handleArtistLogin, handleBidderLogin } from '../redux/actioncreator'
 
 class LogIn extends Component {
   state = {
-    currentUser: null,
+    user: null, // Artist or Bidder
     email: '',
     password: ''
   }
 
   artistOrBidder = (e) => {
-    this.setState({ currentUser: e.target.innerText })
-    e.target.style.color = 'red'
+    this.setState({ user: e.target.innerText })
   }
 
   handleChange = (e) => {
@@ -24,22 +23,36 @@ class LogIn extends Component {
 
   submitHandler = (e) => {
     e.preventDefault()
-    this.state.currentUser === 'Artist' ?
-    this.props.handleArtistLogin(this.state.email, this.state.password) : this.props.handleBidderLogin(this.state.email, this.state.password)
-    this.state.currentUser === 'Artist' ?
-    this.props.history.push('/index') : this.props.history.push('/login')
+    switch(this.state.user) {
+      case 'Artist':
+        this.props.handleArtistLogin(this.state.email, this.state.password)
+        this.props.history.push('/artist/profile')
+      case 'Bidder':
+        this.props.handleBidderLogin(this.state.email, this.state.password)
+        this.props.history.push('/index')
+      default:
+        this.props.history.push('/index')
+    }
   }
 
   render() {
     console.log('state: ', this.state)
     return (
       <div id="login">
-        <h1 onClick={this.artistOrBidder}>Artist</h1>
-        <h1 onClick={this.artistOrBidder}>Bidder</h1>
+        <h2>LOGIN AS</h2>
+        <h1
+          onClick={this.artistOrBidder}
+          className={this.state.user === 'Bidder' ? 'highlight' : null}
+        >Bidder</h1>
+      <span className="font70">     |     </span>
+        <h1
+          onClick={this.artistOrBidder}
+          className={this.state.user === 'Artist' ? 'highlight' : null}
+        >Artist</h1>
         <form onSubmit={this.submitHandler}>
           <input type="text" name="email" placeholder="Email" onChange={this.handleChange}/>
           <input type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
-          <input type="submit" />
+          <input type="submit" value="Login" />
         </form>
       </div>
     )

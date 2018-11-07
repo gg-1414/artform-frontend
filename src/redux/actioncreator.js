@@ -29,3 +29,29 @@ export const handleBidderLogin = (email, password) => {
     }))
   }
 }
+
+export const removeCurrentUser = () => {
+  return dispatch => {
+    dispatch({
+      type: "LOG_OUT_USER"
+    })
+  }
+}
+
+export const fetchArts = () => {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/arts')
+    .then(res => res.json())
+    .then(arts => dispatch({
+      type: "FETCH_ARTS", payload: arts
+    }))
+  }
+}
+
+export const setCurrentArt = (art) => {
+  return dispatch => {
+    dispatch({
+      type: "SET_CURRENT_ART", payload: art
+    })
+  }
+}

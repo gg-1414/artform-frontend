@@ -1,9 +1,134 @@
 #arts-container {
   display: inline-block;
-  height: 580px;
+  height: 590px;
   /* width: 77%; */
   width: 91%;
   float: right;
   overflow: scroll;
   padding: 15px;
+}
+
+/* MODAL! ART SHOW PAGE! */
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba(0,0,0,0.4);
+  -webkit-animaton-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-content {
+  width: 86%;
+  height: 400px;
+  position: relative;
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  overflow: scroll;
+
+}
+
+#art-image {
+  display: inline-block;
+  float: left;
+  height: 100%;
+}
+
+#art-image img {
+  height: 100%;
+}
+
+#art-description {
+  padding: 35px;
+  display: inline-block;
+  float: left;
+  height: 84.5%;
+  /* width: 300px; */
+  background: #fff;
+}
+
+#art-description h2 {
+  /* display: inline-block; */
+  margin: 10px 25px 5px 0;
+  font-size: 37px;
+  font-weight: 100;
+}
+
+#art-description h4 {
+  margin: 0px;
+  /* margin-bottom: 70px; */
+  font-size: 19px;
+  color: #1e1e1e;
+  font-weight: 100;
+}
+
+.tags {
+  width: 100%;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.hashtag {
+  display: inline-block;
+  height: 100px;
+  width: 250px;
+}
+
+.hashtag button {
+  color: grey;
+}
+
+#auction {
+  float: right;
+  height: 100%;
+  /* margin-top: 17px; */
+  /* margin-right: 23px; */
+  width: 120px;
+  background: #0000001f;
+  /* border-left: 2px solid #757575; */
+  /* border: 2px solid #5c5c5c; */
+  text-align: center;
+}
+
+#auction h4 {
+  color: #202020;
+  color: #eaeaea;
+  font-size: 21px;
+  margin: 15px 7px;
+  font-weight: 200;
+  /* text-shadow: 0 0 15px #eaeaea; */
+  /* text-decoration: underline; */
+  /* border: 2px solid #6f6f6f; */
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* ANIMATIONS! */
+@-webkit-keyframes slideIn {
+  from { bottom: -300px; opacity: 0 }
+  to { bottom: 0; opacity: 1 }
+}
+
+@keyframes slideIn {
+  from { bottom: -300px; opacity: 0 }
+  to { bottom: 0; opacity: 1 }
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
 }

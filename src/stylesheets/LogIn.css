@@ -1,13 +1,35 @@
 #login {
   text-align: center;
+  letter-spacing: 8px;
+}
+
+#login h2 {
+  font-size: 30px;
 }
 
 #login h1 {
   margin: 20px;
   cursor: pointer;
+  font-size: 60px;
+}
+
+.font70 {
+  font-size: 70px;
+}
+
+.highlight {
+  color: red;
 }
 
 #login input {
-  font-size: 15px;
+  font-size: 20px;
+  padding: 8px;
+  width: 350px;
+  display: block;
+  margin: 30px auto;
+}
+
+#login input[type=submit] {
+  width: 100px;
   padding: 5px;
 }

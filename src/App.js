@@ -6,21 +6,16 @@ import Nav from './components/Nav'
 import ArtsContainer from './containers/ArtsContainer'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
+import ArtistProfileContainer from './containers/ArtistProfileContainer'
 
 class App extends Component {
-  state = {
-    signUp: false
-  }
-
-  signUpHandler = (e) => {
-    this.setState({signUp: true})
-  }
 
   render() {
 
     return (
       <div className="App">
         <Nav />
+        <Route path= '/artist/profile' component={ArtistProfileContainer} />
         <Route path= '/login' component={LogIn} />
         <Route path= '/signup' component={SignUp} />
         <Route exact path= '/index' component={ArtsContainer} />

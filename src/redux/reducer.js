@@ -1,5 +1,7 @@
 const initialState = {
-  currentUser: null
+  currentUser: null,
+  arts: [],
+  currentArt: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -11,6 +13,15 @@ const reducer = (state=initialState, action) => {
     case "LOG_IN_BIDDER":
       localStorage.setItem('token', action.payload.jwt)
       return {...state, currentUser: action.payload}
+
+    case "LOG_OUT_USER":
+      return {...state, currentUser: null}
+
+    case "FETCH_ARTS":
+      return {...state, arts: action.payload}
+
+    case "SET_CURRENT_ART":
+      return {...state, currentArt: action.payload}
 
     default:
       return state

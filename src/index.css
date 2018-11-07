@@ -10,6 +10,7 @@ body {
     sans-serif; */
   font-family: 'Titillium Web', sans-serif;
   background-color: #ebebeb;
+  letter-spacing: 1px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

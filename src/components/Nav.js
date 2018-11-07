@@ -2,10 +2,16 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import '../stylesheets/Nav.css';
+import { removeCurrentUser } from '../redux/actioncreator'
 
 class Nav extends Component {
+  handleLogOut = (e) => {
+    localStorage.removeItem('token')
+    this.props.removeCurrentUser()
+  }
+
   loggedIn = () => {
-    if(this.props.currentUser === null) {
+    if(localStorage.token === 'undefined' || localStorage.token === undefined) {
       return (
         <Fragment>
           <span><Link to='/signup'>Sign Up</Link></span>
@@ -13,7 +19,7 @@ class Nav extends Component {
         </Fragment>
       )
     } else {
-      return <span><Link to='/index'>Sign Out</Link></span>
+      return <span><Link to='/index' onClick={this.handleLogOut}>Log Out</Link></span>
     }
   }
 
@@ -36,4 +42,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Nav));
+// const mapDispatchToProps = () => {
+//   return {
+//     removeCurrentUser: () => {dispatch(removeCurrentUser)}
+//   }
+// }
+
+export default withRouter(connect(mapStateToProps, {removeCurrentUser})(Nav));
