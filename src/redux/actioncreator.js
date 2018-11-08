@@ -108,13 +108,25 @@ export const removeCurrentArt = () => {
   }
 }
 
-export const fetchBids = () => {
+export const fetchAllBids = () => {
   return dispatch => {
     fetch('http://localhost:3000/api/v1/biddings')
       .then(res => res.json())
       .then(biddings => {
         dispatch({
-          type: "FETCH_BIDS", payload: biddings
+          type: "FETCH_ALL_BIDS", payload: biddings
+        })
+      })
+  }
+}
+
+export const fetchBids = (artId) => {
+  return dispatch => {
+    fetch(`http://localhost:3000/api/v1/arts/${artId}`)
+      .then(res => res.json())
+      .then(art => {
+        dispatch({
+          type: "FETCH_BIDS", payload: art.biddings
         })
       })
   }

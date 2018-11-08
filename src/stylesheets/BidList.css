@@ -3,6 +3,7 @@
 }
 
 #bid-form {
-  position: absolute;
+  position: relative;
   bottom: 0;
+  float: left;
 }

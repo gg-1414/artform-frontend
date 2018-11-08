@@ -4,7 +4,8 @@ const initialState = {
   authCurrentUser: null,
   arts: [],
   currentArt: null,
-  allBids: []
+  allBids: [],
+  bids: []
 }
 
 const reducer = (state=initialState, action) => {
@@ -20,9 +21,9 @@ const reducer = (state=initialState, action) => {
       localStorage.setItem('token', action.payload.jwt)
       return {...state, currentUser: action.payload}
 
-    case "GET_USER":
-    console.log(action.payload);
-      return {...state, authCurrentUser: action.payload, currentUser: action.payload}
+    case "GET_USER": // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // console.log(action.payload);
+      return {...state, currentUser: action.payload, authCurrentUser: action.payload}
 
     case "LOG_OUT_USER":
       localStorage.removeItem('token')
@@ -37,8 +38,14 @@ const reducer = (state=initialState, action) => {
     case "REMOVE_CURRENT_ART":
       return {...state, currentArt: null}
 
-    case "FETCH_BIDS":
+    case "FETCH_ALL_BIDS":
       return {...state, allBids: action.payload}
+
+    case "FETCH_BIDS":
+      return {...state, bids: action.payload}
+
+    // case "SET_HIGHEST_BID":
+    //   return {...state, highestBid: state.}
 
     default:
       return state
