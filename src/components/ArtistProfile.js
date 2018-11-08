@@ -6,7 +6,7 @@ class ArtistProfile extends Component {
     return (
       <div>
         <img src="/images/artist_gina.jpg" />
-        
+
       </div>
     )
   }

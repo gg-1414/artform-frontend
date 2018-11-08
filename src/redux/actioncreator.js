@@ -55,3 +55,11 @@ export const setCurrentArt = (art) => {
     })
   }
 }
+
+export const removeCurrentArt = () => {
+  return dispatch => {
+    dispatch({
+      type: "REMOVE_CURRENT_ART"
+    })
+  }
+}

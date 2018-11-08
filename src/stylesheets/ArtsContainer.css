@@ -27,7 +27,7 @@
 }
 
 .modal-content {
-  width: 86%;
+  /* width: 86%; */
   height: 400px;
   position: relative;
   -webkit-animation-name: slideIn;
@@ -49,17 +49,17 @@
 }
 
 #art-description {
-  padding: 35px;
+  padding: 0 35px;
   display: inline-block;
   float: left;
-  height: 84.5%;
+  height: 100%;
   /* width: 300px; */
   background: #fff;
 }
 
 #art-description h2 {
   /* display: inline-block; */
-  margin: 10px 25px 5px 0;
+  margin: 30px 25px 5px 0;
   font-size: 37px;
   font-weight: 100;
 }
@@ -93,8 +93,8 @@
   height: 100%;
   /* margin-top: 17px; */
   /* margin-right: 23px; */
-  width: 120px;
-  background: #0000001f;
+  width: 150px;
+  background: #00000044;
   /* border-left: 2px solid #757575; */
   /* border: 2px solid #5c5c5c; */
   text-align: center;
@@ -111,6 +111,56 @@
   /* border: 2px solid #6f6f6f; */
   border-bottom: 1px solid #eaeaea;
 }
+
+#auction img {
+  height: 30px;
+  border-radius: 50px;
+  /* margin-top: 2px; */
+  position: relative;
+  top: 10px;
+  left: -11px;
+  border: 1px solid #fff;
+}
+
+#auction span {
+  color: #eaeaea;
+}
+
+#auction span:nth-child(1) {
+  margin-right: 5px;
+}
+
+#auction input {
+  margin: 0px auto;
+  padding: 1px 0;
+  position: relative;
+  bottom: -268px;
+  font-size: 22px;
+  width: 49%;
+  border: 2px solid #424242;
+  background: black;
+  color: white;
+}
+
+#auction button {
+  position: relative;
+  bottom: -268px;
+  /* margin-left: 13px; */
+  padding: 3px 7px;
+  font-size: 21px;
+  width: 47%;
+  font-weight: bold;
+  background: black;
+  color: white;
+  border: 1px solid #424242;
+}
+
+#auction button:hover {
+  cursor: pointer;
+  /* background: #333333; */
+  color: red;
+}
+
 
 /* ANIMATIONS! */
 @-webkit-keyframes slideIn {

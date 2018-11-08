@@ -23,6 +23,9 @@ const reducer = (state=initialState, action) => {
     case "SET_CURRENT_ART":
       return {...state, currentArt: action.payload}
 
+    case "REMOVE_CURRENT_ART":
+      return {...state, currentArt: null}
+
     default:
       return state
   }
