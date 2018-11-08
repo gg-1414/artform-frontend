@@ -1,3 +1,11 @@
+export const setCurrentUserType = (userType) => {
+  return dispatch => {
+    dispatch({
+      type: "SET_CURRENT_USER_TYPE", payload: userType
+    })
+  }
+}
+
 export const handleArtistLogin = (email, password) => {
   return dispatch => {
     fetch('http://localhost:3000/api/v1/artists_auth', {
@@ -30,10 +38,46 @@ export const handleBidderLogin = (email, password) => {
   }
 }
 
+export const fetchUser = (token) => {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/current_bidder', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Accept: "application/json",
+        Authorization: token
+      }
+    })
+      .then(res => res.json())
+      .then(bidder => {
+        dispatch({
+          type: "GET_USER", payload: bidder
+        })
+      })
+      // .catch(error => {
+      //   console.log(error);
+      //   fetch('http://localhost:3000/api/v1/current_artist', {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json; charset=utf-8",
+      //       Accept: "application/json",
+      //       Authorization: token
+      //     }
+      //   })
+      //     .then(res => res.json())
+      //     .then(artist => {
+      //       dispatch({
+      //         type: "GET_USER", payload: artist
+      //       })
+      //     })
+      // })
+  }
+}
+
 export const removeCurrentUser = () => {
   return dispatch => {
     dispatch({
-      type: "LOG_OUT_USER"
+      type: "LOG_OUT_USER", payload: null
     })
   }
 }
@@ -61,5 +105,17 @@ export const removeCurrentArt = () => {
     dispatch({
       type: "REMOVE_CURRENT_ART"
     })
+  }
+}
+
+export const fetchBids = () => {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/biddings')
+      .then(res => res.json())
+      .then(biddings => {
+        dispatch({
+          type: "FETCH_BIDS", payload: biddings
+        })
+      })
   }
 }

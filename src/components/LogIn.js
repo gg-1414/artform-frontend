@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import '../stylesheets/LogIn.css'
-import { handleArtistLogin, handleBidderLogin } from '../redux/actioncreator'
+import { setCurrentUserType, handleArtistLogin, handleBidderLogin } from '../redux/actioncreator'
 
 class LogIn extends Component {
   state = {
@@ -13,6 +13,7 @@ class LogIn extends Component {
 
   artistOrBidder = (e) => {
     this.setState({ user: e.target.innerText })
+    this.props.setCurrentUserType(e.target.innerText)
   }
 
   handleChange = (e) => {
@@ -23,13 +24,15 @@ class LogIn extends Component {
 
   submitHandler = (e) => {
     e.preventDefault()
-    switch(this.state.user) {
+    switch(this.props.currentUserType) {
       case 'Artist':
         this.props.handleArtistLogin(this.state.email, this.state.password)
         this.props.history.push('/artist/profile')
+        break
       case 'Bidder':
         this.props.handleBidderLogin(this.state.email, this.state.password)
         this.props.history.push('/index')
+        break
       default:
         this.props.history.push('/index')
     }
@@ -37,6 +40,7 @@ class LogIn extends Component {
 
   render() {
     console.log('state: ', this.state)
+    console.log('currentUserType: ', this.props.currentUserType);
     return (
       <div id="login">
         <h2>LOGIN AS</h2>
@@ -59,4 +63,10 @@ class LogIn extends Component {
   }
 }
 
-export default withRouter(connect(null, { handleArtistLogin, handleBidderLogin })(LogIn));
+const mapStateToProps = state => {
+  return {
+    currentUserType: state.currentUserType
+  }
+}
+
+export default withRouter(connect(mapStateToProps, { setCurrentUserType, handleArtistLogin, handleBidderLogin })(LogIn));

@@ -8,10 +8,7 @@ class SignUp extends Component {
 
   submitHandler = (e) => {
     e.preventDefault()
-    const data = {
 
-    }
-    fetch('')
   }
 
   render() {

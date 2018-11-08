@@ -5,7 +5,7 @@ class ArtistProfile extends Component {
   render() {
     return (
       <div>
-        <img src="/images/artist_gina.jpg" />
+        {/*<img src="/images/artist_gina.jpg" />*/}
 
       </div>
     )

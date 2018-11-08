@@ -6,7 +6,6 @@ import { removeCurrentUser } from '../redux/actioncreator'
 
 class Nav extends Component {
   handleLogOut = (e) => {
-    localStorage.removeItem('token')
     this.props.removeCurrentUser()
   }
 
@@ -24,11 +23,11 @@ class Nav extends Component {
   }
 
   render() {
-    console.log('current user: ', this.props.currentUser);
+    // console.log('current user: ', this.props.currentUser);
     return (
       <header>
         <nav>
-          <h1>Artform</h1>
+          <h1><Link to='/index'>Artform</Link></h1>
           {this.loggedIn()}
         </nav>
       </header>

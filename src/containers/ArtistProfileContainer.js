@@ -8,8 +8,6 @@ class ArtistProfileContainer extends Component {
     currentTab: 'Profile'
   }
 
-
-
   render() {
     return (
       <div>
