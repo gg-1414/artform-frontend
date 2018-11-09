@@ -131,3 +131,7 @@ export const fetchBids = (artId) => {
       })
   }
 }
+
+// export const startTimeOut = () => {
+//   return dispatch
+// }

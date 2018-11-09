@@ -20,12 +20,31 @@ class ArtShow extends Component {
     }
   }
 
+  startTimeOut = () => {
+    console.log('timeout!');
+  }
+
   bidAmountChangeHandler = (e) => {
     this.setState({ bidAmount: e.target.value })
   }
 
   bidClickHandler = (e) => {
     e.preventDefault()
+    if(!this.props.bids.length) {
+      const d = new Date()
+      const minutes = d.getMinutes() 
+      const seconds = d.getSeconds()
+      console.log('Time: ', minutes, ':', seconds);
+
+      // fetch(`http://localhost:3000/api/v1/arts/{this.props.currentArt.id}`, {
+      //   method: "PATCH",
+      //   headers: {
+      //     "Content-Type": "application/json; charset=utf-8"
+      //   },
+      //   body: JSON.stringify(data) // {startTime: DateTime.now}
+      // })
+    }
+
     const data = {
       art_id: this.props.currentArt.id,
       bidder_id: this.props.currentUser.id,
@@ -43,8 +62,8 @@ class ArtShow extends Component {
   }
 
   render() {
-    // console.log('currentUser!:', this.props.currentUser);
-    // console.log('currentArt!:', this.props.currentArt);
+    console.log('currentUser!:', this.props.currentUser);
+    console.log('currentArt!:', this.props.currentArt);
     console.log('bidAmount!:', this.state.bidAmount);
     // console.log('bids!!: ', this.props.bids);
     let currentArt = this.props.currentArt,

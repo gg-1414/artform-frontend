@@ -4,10 +4,20 @@ import { setCurrentArt } from '../redux/actioncreator'
 import '../stylesheets/ArtCard.css'
 
 class ArtCard extends Component {
+  state = {
+    timeLeft: 0
+  }
 
   handleArtClick = (e) => {
     this.props.setCurrentArt(this.props.artData)
   }
+
+  // artData.startTime => 1:00
+  // if (artData.startTime !== 0:00){
+  //  this.setState({ timeLeft:  })
+  // }
+  // <div className={artData.startTime !== 0 ? }
+  //   onClick={this.handleArtClick}>
 
   render() {
     return (

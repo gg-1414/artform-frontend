@@ -44,8 +44,8 @@ const reducer = (state=initialState, action) => {
     case "FETCH_BIDS":
       return {...state, bids: action.payload}
 
-    // case "SET_HIGHEST_BID":
-    //   return {...state, highestBid: state.}
+    // case "START_TIME_OUT":
+    //   return {...state, }
 
     default:
       return state
