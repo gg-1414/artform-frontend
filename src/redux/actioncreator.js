@@ -150,7 +150,7 @@ export const getHighestBidder = (artId) => {
 
 export const setWinner = (artId, bidder) => {
   return dispatch => {
-    fetch(`http://localhost:3000/api/v1/arts/${artId}`, {
+    fetch(`http://localhost:3000/api/v1/arts/winner/${artId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json; charset=utf-8",

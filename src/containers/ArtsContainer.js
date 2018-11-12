@@ -16,6 +16,7 @@ class ArtsContainer extends Component {
   }
 
   render() {
+    console.log(this.props.arts)
     const arts = this.props.arts.filter(art => {
       return art.winner_id === null
     })
