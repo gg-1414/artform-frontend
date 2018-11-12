@@ -4,10 +4,11 @@ import '../stylesheets/ArtShow.css'
 
 class BidListItem extends Component {
   render() {
+    // console.log(this.props.bid);
     return (
-      <div className="bid-item" key={this.props.bid.id}>
-        <span className="bidder-initial">{this.props.bid.bidder.slice(0,1)}</span>
-        <span>{this.props.bid.bidder} </span>
+      <div className="bid-item" >
+        <span className="bidder-initial">{this.props.bid.bidder_name.slice(0,1)}</span>
+        <span>{this.props.bid.bidder_name} </span>
         <span> ${this.props.bid.bid_amount}</span>
       </div>
     )

@@ -108,6 +108,8 @@ export const removeCurrentArt = () => {
   }
 }
 
+
+
 export const fetchAllBids = () => {
   return dispatch => {
     fetch('http://localhost:3000/api/v1/biddings')
@@ -132,6 +134,35 @@ export const fetchBids = (artId) => {
   }
 }
 
-// export const startTimeOut = () => {
-//   return dispatch
-// }
+export const getHighestBidder = (artId) => {
+  return dispatch => {
+    fetch(`http://localhost:3000/api/v1/arts/${artId}`)
+      .then(res => res.json())
+      .then(art => {
+        const winner = art.biddings.slice(-1)
+        console.log('WINNER:', winner);
+        dispatch({
+          type: "SET_WINNER", payload: winner
+        })
+      })
+    }
+}
+
+export const setWinner = (artId, bidder) => {
+  return dispatch => {
+    fetch(`http://localhost:3000/api/v1/arts/${artId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ winner_id: bidder.bidder_id })
+    })
+      .then(res => res.json())
+      .then(art => {
+        dispatch({
+          type: "SET_WINNER", payload: bidder
+        })
+      })
+    }
+}

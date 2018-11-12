@@ -11,11 +11,18 @@ class ArtsContainer extends Component {
   }
 
   componentDidMount() {
+    console.log('MOUNTEDDDDDD');
     this.props.fetchArts()
   }
 
   render() {
-    const artCards = this.props.arts.map(art => <ArtCard artData={art} key={art.id} />)
+    const arts = this.props.arts.filter(art => {
+      return art.winner_id === null
+    })
+    console.log('WINNER!: ', this.props.winner);
+    // console.log('arts: ', arts);
+    // const artCards = arts.map(art => <ArtCard artData={art} key={art.id} />)
+    const artCards = arts.map(art => <ArtCard artData={art} key={art.id} />)
 
     console.log('Current Art: ', this.props.currentArt)
     console.log('currentUser: ', this.props.currentUser);
@@ -35,7 +42,8 @@ const mapStateToProps = state => {
     currentUser: state.currentUser,
     authCurrentUser: state.authCurrentUser,
     arts: state.arts,
-    currentArt: state.currentArt
+    currentArt: state.currentArt,
+    winner: state.winner
   }
 }
 

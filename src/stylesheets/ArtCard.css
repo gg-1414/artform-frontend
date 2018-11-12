@@ -16,3 +16,23 @@
   box-shadow: 0px 0px 17px #bebebe, 0 0 9px #3d3d3d;
   z-index: -1;
 }
+
+.auction {
+  background: rgba(0, 0, 0, 0.28);
+  /* filter: brightness(80%); */
+  box-shadow: 0 0 10px #363636;
+  text-align: center;
+  position: relative;
+  /* transition-duration: 4s; */
+}
+
+.auction span {
+  /* display: inline-block; */
+  z-index: 2;
+  position: absolute;
+  top: 7px;
+  left: 17px;
+  color: white;
+  font-size: 18px;
+  text-shadow: 0px 0px 8px #000000, 0 0 2px black;
+}

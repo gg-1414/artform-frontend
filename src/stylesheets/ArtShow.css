@@ -21,7 +21,7 @@
   height: 400px;
   position: relative;
   -webkit-animation-name: slideIn;
-  animation-name: slideIn;
+  animation-name: slideIn;,
   -webkit-animation-duration: 0.4s;
   animation-duration: 0.4s;
   overflow: scroll;
@@ -179,6 +179,16 @@
   left: -11px;
   display: inline-block;
   width: 7px;
+}
+
+.auction-state {
+  text-align: center;
+  margin-top: 13px;
+  background: #1a1a1a;
+  padding: 5px 20px;
+  color: #00ff3e;
+  font-weight: bold;
+  text-shadow: 0px 0px 7px #58ff13;
 }
 
 /* ANIMATIONS! */

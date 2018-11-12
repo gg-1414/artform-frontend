@@ -5,7 +5,8 @@ const initialState = {
   arts: [],
   currentArt: null,
   allBids: [],
-  bids: []
+  bids: [],
+  winner: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -44,8 +45,9 @@ const reducer = (state=initialState, action) => {
     case "FETCH_BIDS":
       return {...state, bids: action.payload}
 
-    // case "START_TIME_OUT":
-    //   return {...state, }
+    case "SET_WINNER":
+      console.log('ACTION PAYLOAD: ', action.payload);
+      return {...state, winner: action.payload}
 
     default:
       return state

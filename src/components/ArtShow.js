@@ -2,16 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../stylesheets/ArtShow.css'
 import BidListItem from './BidListItem'
-import { removeCurrentArt, fetchBids } from '../redux/actioncreator'
+import { removeCurrentArt, fetchBids, setCurrentArt, fetchArts, getHighestBidder,setWinner } from '../redux/actioncreator'
+
+let interval;
 
 class ArtShow extends Component {
   state = {
     currentUser: null,
-    bidAmount: 0
+    bidAmount: 0,
+    timeLeft: null
   }
 
   componentDidMount() {
-    this.props.fetchBids(this.props.currentArt.id)
+    fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`)
+      .then(res => res.json())
+      .then(art => {
+        this.props.setCurrentArt(art)
+        this.props.fetchBids(this.props.currentArt.id)
+        // console.log('PROPS CURRENT ART:' , this.props.currentArt);
+        if(this.props.currentArt.start_time !== '') {
+          this.startTimer(this.props.currentArt.start_time)
+        }
+      })
+  }
+
+  componentWillUnmount() {
+    clearInterval(interval)
+    this.props.fetchArts()
+    console.log('dis the winnerrrr:', this.props.winner);
+    if(this.props.winner !== null) {
+      console.log('hi');
+      this.props.setWinner(this.props.currentArt.id, this.props.winner[0])
+    }
   }
 
   closeModal = (e) => {
@@ -20,8 +42,20 @@ class ArtShow extends Component {
     }
   }
 
-  startTimeOut = () => {
-    console.log('timeout!');
+  startTimer = (startTime) => {
+    console.log('time: ', this.state.timeLeft);
+    interval = setInterval(() => {
+      console.log('new time: ', this.state.timeLeft);
+      if(this.state.timeLeft === 0){
+        clearInterval(interval)
+        this.props.getHighestBidder(this.props.currentArt.id)
+      } else {
+        const timeNow = Date.now()
+        const timeElapsedMS = timeNow - startTime
+        const timeElapsedSEC = Math.floor(timeElapsedMS/1000)
+        this.setState({ timeLeft: 10 - parseInt(timeElapsedSEC) })
+      }
+    }, 1000)
   }
 
   bidAmountChangeHandler = (e) => {
@@ -31,18 +65,23 @@ class ArtShow extends Component {
   bidClickHandler = (e) => {
     e.preventDefault()
     if(!this.props.bids.length) {
-      const d = new Date()
-      const minutes = d.getMinutes() 
-      const seconds = d.getSeconds()
-      console.log('Time: ', minutes, ':', seconds);
+      const data = {
+        start_time: Date.now()
+      }
 
-      // fetch(`http://localhost:3000/api/v1/arts/{this.props.currentArt.id}`, {
-      //   method: "PATCH",
-      //   headers: {
-      //     "Content-Type": "application/json; charset=utf-8"
-      //   },
-      //   body: JSON.stringify(data) // {startTime: DateTime.now}
-      // })
+      fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(art => {
+        this.startTimer(art.start_time)
+        this.props.setCurrentArt(art)
+      })
     }
 
     const data = {
@@ -62,14 +101,11 @@ class ArtShow extends Component {
   }
 
   render() {
-    console.log('currentUser!:', this.props.currentUser);
-    console.log('currentArt!:', this.props.currentArt);
-    console.log('bidAmount!:', this.state.bidAmount);
-    // console.log('bids!!: ', this.props.bids);
+    console.log('CURRENT ART?:', this.props.currentArt);
     let currentArt = this.props.currentArt,
         bids = this.props.bids
 
-    const artCurrentBids =  bids.map(bid => <BidListItem bid={bid} key={bid.id} />)
+    const artCurrentBids = bids.map(bid => <BidListItem bid={bid} key={bid.id} />)
 
     return (
       <div id="art-showpage" className="modal" onClick={this.closeModal}>
@@ -78,8 +114,14 @@ class ArtShow extends Component {
             <img src={currentArt.img_url} alt={currentArt.title} />
           </div>
           <div id="art-description">
+            {!!this.state.timeLeft ?
+              <div className="auction-state">
+                <span>00:00:{this.state.timeLeft < 10 ? `0${this.state.timeLeft}` : this.state.timeLeft }</span>
+              </div> :
+              <div className="auction-state">Open For Auction</div>
+            }
             <h2>{currentArt.title}</h2>
-            <h4>by {currentArt.artist.name}</h4> {/* <Link to='/artist/profile' />*/}
+            <h4>by {currentArt.artist.name}</h4>
           </div>
           <div id="auction">
             <h4>BIDDERS</h4>
@@ -110,8 +152,9 @@ const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
     currentArt: state.currentArt,
-    bids: state.bids
+    bids: state.bids,
+    winner: state.winner
   }
 }
 
-export default connect(mapStateToProps, { removeCurrentArt, fetchBids })(ArtShow);
+export default connect(mapStateToProps, { removeCurrentArt, fetchBids, setCurrentArt, fetchArts, setWinner, getHighestBidder })(ArtShow);
