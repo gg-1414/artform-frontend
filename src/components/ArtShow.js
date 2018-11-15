@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../stylesheets/ArtShow.css'
 import BidListItem from './BidListItem'
-import { removeCurrentArt, fetchBids, setCurrentArt, fetchArts, getHighestBidder,setWinner } from '../redux/actioncreator'
+import { removeCurrentArt, fetchBids, setCurrentArt, fetchArts, removeArtFromArts, setLatestAuctionedArt, removeWinner, fetchUser } from '../redux/actioncreator'
 
 let interval;
 
@@ -14,12 +14,16 @@ class ArtShow extends Component {
   }
 
   componentDidMount() {
+    if(localStorage.getItem('token')) {
+      this.props.fetchUser(localStorage.token)
+    }
+
     fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`)
       .then(res => res.json())
       .then(art => {
         this.props.setCurrentArt(art)
         this.props.fetchBids(this.props.currentArt.id)
-        // console.log('PROPS CURRENT ART:' , this.props.currentArt);
+
         if(this.props.currentArt.start_time !== '') {
           this.startTimer(this.props.currentArt.start_time)
         }
@@ -28,12 +32,21 @@ class ArtShow extends Component {
 
   componentWillUnmount() {
     clearInterval(interval)
-    this.props.fetchArts()
-    console.log('dis the winnerrrr:', this.props.winner);
     if(this.props.winner !== null) {
-      console.log('hi');
-      this.props.setWinner(this.props.currentArt.id, this.props.winner[0])
+      const data = {
+        winner_id: this.props.winner[0].bidder_id
+      }
+
+      fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
     }
+    this.props.fetchArts()
   }
 
   closeModal = (e) => {
@@ -42,18 +55,44 @@ class ArtShow extends Component {
     }
   }
 
+  getWinner = () => {
+    let winner;
+    fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`)
+      .then(res => res.json())
+      .then(art => {
+        winner = art.biddings.slice(-1)[0]
+        this.props.setWinner(winner)
+        return art
+      }).then(res => {
+        return fetch(`http://localhost:3000/api/v1/arts/winner/${this.props.currentArt.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ winner_id: winner.bidder_id })
+        })
+          .then(res => res.json())
+          .then(art => {
+            console.log(art); // => art obj
+          })
+      })
+  }
+
   startTimer = (startTime) => {
     console.log('time: ', this.state.timeLeft);
     interval = setInterval(() => {
       console.log('new time: ', this.state.timeLeft);
       if(this.state.timeLeft === 0){
         clearInterval(interval)
-        this.props.getHighestBidder(this.props.currentArt.id)
+        this.getWinner()
+        this.props.setLatestAuctionedArt(this.props.currentArt)
+        this.props.removeCurrentArt()
       } else {
         const timeNow = Date.now()
         const timeElapsedMS = timeNow - startTime
         const timeElapsedSEC = Math.floor(timeElapsedMS/1000)
-        this.setState({ timeLeft: 10 - parseInt(timeElapsedSEC) })
+        this.setState({ timeLeft: 5 - parseInt(timeElapsedSEC) })
       }
     }, 1000)
   }
@@ -101,7 +140,9 @@ class ArtShow extends Component {
   }
 
   render() {
-    console.log('CURRENT ART?:', this.props.currentArt);
+    // console.log('CURRENT ART?:', this.props.currentArt);
+    // console.log("ARTSHOW ARTS: ", this.props.arts);
+    console.log('winner from artshow:', this.props.winner);
     let currentArt = this.props.currentArt,
         bids = this.props.bids
 
@@ -153,8 +194,10 @@ const mapStateToProps = state => {
     currentUser: state.currentUser,
     currentArt: state.currentArt,
     bids: state.bids,
-    winner: state.winner
+    winner: state.winner,
+    arts: state.arts,
+    latestAuctionedArt: state.latestAuctionedArt
   }
 }
 
-export default connect(mapStateToProps, { removeCurrentArt, fetchBids, setCurrentArt, fetchArts, setWinner, getHighestBidder })(ArtShow);
+export default connect(mapStateToProps, { removeCurrentArt, fetchBids, setCurrentArt, fetchArts, removeArtFromArts, setLatestAuctionedArt, removeWinner, fetchUser })(ArtShow);

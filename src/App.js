@@ -7,6 +7,7 @@ import ArtsContainer from './containers/ArtsContainer'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
 import ArtistProfileContainer from './containers/ArtistProfileContainer'
+import BidderProfileContainer from './containers/BidderProfileContainer'
 import { fetchUser } from './redux/actioncreator'
 
 class App extends Component {
@@ -17,15 +18,14 @@ class App extends Component {
   }
 
   render() {
-    console.log('currentUser: ', this.props.currentUser);
-    console.log('authCurrentUser: ', this.props.authCurrentUser);
     return (
       <div className="App">
         <Nav />
-        <Route path= '/artist/profile' component={ArtistProfileContainer} />
-        <Route path= '/login' component={LogIn} />
-        <Route path= '/signup' component={SignUp} />
-        <Route exact path= '/index' component={ArtsContainer} />
+        <Route path='/artist/profile' component={ArtistProfileContainer} />
+        <Route path='/bidder/profile' component={BidderProfileContainer} />
+        <Route path='/login' component={LogIn} />
+        <Route path='/signup' component={SignUp} />
+        <Route exact path='/index' component={ArtsContainer} />
       </div>
     );
   }

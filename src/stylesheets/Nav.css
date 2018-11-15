@@ -11,23 +11,63 @@ nav {
   font-size: 18px;
 }
 
-h1 {
+nav h1 {
   display: inline;
 }
 
 nav h1 a {
   text-decoration: none;
   color: black;
+  margin-left: 15px;
+  transition-duration: 0.5s;
+}
+
+nav h1 a:hover {
+  /* cursor: pointer; */
+  color: red;
+  filter: hue-rotate(285deg);
+  /* font-size: 29px; */
+  letter-spacing: 5px;
 }
 
 nav span {
   float: right;
-  margin-top: 5px;
+  margin-top: 6px;
   margin-right: 15px;
   cursor: pointer;
+}
+
+nav span:hover {
+  margin-right: 14px;
 }
 
 nav span a {
   text-decoration: none;
   color: black;
+  transition-duration: 0.5s;
+}
+
+nav span a:hover {
+  font-weight: 700;
+  /* color: #222222; */
+  letter-spacing: 2px;
+  color: #c043aa;
+}
+
+#profile {
+  width: 40px;
+  float: right;
+  margin-right: 12px;
+  margin-top: 2px;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+#profile:hover {
+  cursor: pointer;
+  width: 41px;
+  margin-top: 1px;
+  background: #eca3f8;
+  border-radius: 50px;
+  border: 1px solid transparent;
 }

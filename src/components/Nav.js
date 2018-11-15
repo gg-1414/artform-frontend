@@ -2,28 +2,36 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import '../stylesheets/Nav.css';
-import { removeCurrentUser } from '../redux/actioncreator'
+import { removeCurrentUser, getMessages } from '../redux/actioncreator'
 
 class Nav extends Component {
   handleLogOut = (e) => {
     this.props.removeCurrentUser()
   }
 
+  profileClickHandler = () => {
+    this.props.getMessages(this.props.currentUser.id)
+  }
+
   loggedIn = () => {
     if(localStorage.token === 'undefined' || localStorage.token === undefined) {
       return (
         <Fragment>
-          <span><Link to='/signup'>Sign Up</Link></span>
-          <span><Link to='/login'>Log In</Link></span>
+          <span className="nav-link"><Link to='/signup'>Sign Up</Link></span>
+          <span className="nav-link"><Link to='/login'>Log In</Link></span>
         </Fragment>
       )
     } else {
-      return <span><Link to='/index' onClick={this.handleLogOut}>Log Out</Link></span>
+      return (
+        <Fragment>
+          <span className="nav-link"><Link to='/index' onClick={this.handleLogOut}>Log Out</Link></span>
+          <Link to='/bidder/profile' onClick={this.profileClickHandler}><img src="/images/profile-icon.png" alt="profile" id="profile" /></Link>
+        </Fragment>
+      )
     }
   }
 
   render() {
-    // console.log('current user: ', this.props.currentUser);
     return (
       <header>
         <nav>
@@ -37,14 +45,9 @@ class Nav extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    latestAuctionedArt: state.latestAuctionedArt
   }
 }
 
-// const mapDispatchToProps = () => {
-//   return {
-//     removeCurrentUser: () => {dispatch(removeCurrentUser)}
-//   }
-// }
-
-export default withRouter(connect(mapStateToProps, {removeCurrentUser})(Nav));
+export default withRouter(connect(mapStateToProps, {removeCurrentUser, getMessages})(Nav));

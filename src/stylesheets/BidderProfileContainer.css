@@ -1,0 +1,83 @@
+#bidder-profile {
+  height: 100vh;
+}
+
+/* BIDDER ARTS */
+#bidder-arts-container {
+  width: 25%;
+  height: 100%;
+  outline: 1px solid black;
+  display: inline-block;
+  float: left;
+  background: #030303;
+}
+
+#bidder-arts {
+  width: 90%;
+  margin: 20px auto;
+  height: 93%;
+  overflow: scroll;
+}
+
+.bidder-art-item {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin: 30px 0;
+}
+
+.bidder-art-item img {
+  width: 170px;
+  border: 1px solid white;
+}
+
+.art-info {
+  margin: 10px 0;
+}
+
+.bidder-art-item h5 {
+  display: inline-block;
+  margin: 0 20px;
+  font-size: 22px;
+  color: white;
+}
+
+.bidder-art-item p {
+  display: inline;
+  font-size: 20px;
+  color: #d9d9d9;
+}
+
+
+/* BIDDER MESSAGES */
+#bidder-messages {
+  width: 75%;
+  height: 100vh;
+  display: inline-block;
+  float: left;
+}
+
+#bidder-messages h1 {
+  margin-left: 50px;
+}
+
+#messages {
+  height: 80%;
+  width: 85%;
+  margin: 0 auto;
+  overflow: scroll;
+}
+
+.message-text {
+  padding: 5px;
+  border-bottom: 1px solid grey;
+}
+
+.message-text p {
+  display: inline-block;
+  margin-left: 70px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #363636;
+}

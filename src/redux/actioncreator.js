@@ -6,6 +6,22 @@ export const setCurrentUserType = (userType) => {
   }
 }
 
+export const handleLogin = (typeOfUser, email, password) => {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/users_auth', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify({typeOf: typeOfUser, email: email, password: password})
+    })
+    .then(res => res.json())
+    .then(user => dispatch({
+      type: "LOG_IN_USER", payload: user
+    }))
+  }
+}
+
 export const handleArtistLogin = (email, password) => {
   return dispatch => {
     fetch('http://localhost:3000/api/v1/artists_auth', {
@@ -54,30 +70,13 @@ export const fetchUser = (token) => {
           type: "GET_USER", payload: bidder
         })
       })
-      // .catch(error => {
-      //   console.log(error);
-      //   fetch('http://localhost:3000/api/v1/current_artist', {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-Type": "application/json; charset=utf-8",
-      //       Accept: "application/json",
-      //       Authorization: token
-      //     }
-      //   })
-      //     .then(res => res.json())
-      //     .then(artist => {
-      //       dispatch({
-      //         type: "GET_USER", payload: artist
-      //       })
-      //     })
-      // })
   }
 }
 
 export const removeCurrentUser = () => {
   return dispatch => {
     dispatch({
-      type: "LOG_OUT_USER", payload: null
+      type: "LOG_OUT_USER"
     })
   }
 }
@@ -134,35 +133,62 @@ export const fetchBids = (artId) => {
   }
 }
 
-export const getHighestBidder = (artId) => {
+export const setLatestAuctionedArt = (art) => {
   return dispatch => {
-    fetch(`http://localhost:3000/api/v1/arts/${artId}`)
-      .then(res => res.json())
-      .then(art => {
-        const winner = art.biddings.slice(-1)
-        console.log('WINNER:', winner);
-        dispatch({
-          type: "SET_WINNER", payload: winner
-        })
-      })
-    }
+    dispatch({
+      type: "SET_LATEST_AUCTIONED_ART", payload: art
+    })
+  }
 }
 
-export const setWinner = (artId, bidder) => {
+// export const getArtBiddings = (artId) => {
+//   return dispatch => {
+//     fetch()
+//   }
+// }
+
+export const removeArtFromArts = (arts, auctionedArt) => {
+ return dispatch => {
+   const updatedArts = arts.filter(art => {
+     return art.id !== auctionedArt.id
+   })
+   dispatch({
+     type: "REMOVE_ART", payload: updatedArts
+   })
+ }
+}
+
+export const removeWinner = () => {
   return dispatch => {
-    fetch(`http://localhost:3000/api/v1/arts/winner/${artId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ winner_id: bidder.bidder_id })
+    dispatch({
+      type: "REMOVE_WINNER"
     })
+  }
+}
+
+export const setBiddings = (artId) => {
+  return dispatch => {
+    fetch('http://localhost:3000/api/v1/biddings')
       .then(res => res.json())
-      .then(art => {
+      .then(biddings => {
+        const artBiddings = biddings.filter(bidding => {
+          return bidding.art_id === artId
+        })
         dispatch({
-          type: "SET_WINNER", payload: bidder
+          type: "SET_BIDDINGS", payload: artBiddings
         })
       })
-    }
+  }
+}
+
+export const getMessages = (bidderId) => {
+  return dispatch => {
+    fetch(`http://localhost:3000/api/v1/bidders/${bidderId}`)
+      .then(res => res.json())
+      .then(bidder => {
+        return dispatch({
+          type: "GET_MESSAGES", payload: bidder.messages
+        })
+      })
+  }
 }
