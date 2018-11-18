@@ -47,12 +47,23 @@ export const handleBidderLogin = (email, password) => {
       },
       body: JSON.stringify({email: email, password: password})
     })
-    .then(res => res.json())
-    .then(bidder => dispatch({
-      type: "LOG_IN_BIDDER", payload: bidder
-    }))
+    .then(res => {
+      // res.json()
+      if(res.ok) {
+        return res.json()
+      } else {
+        alert('Input is invalid')
+        throw new Error('Input is invalid')
+      }
+    })
+    .then(resp => {
+        dispatch({
+          type: "LOG_IN_BIDDER", payload: resp
+        })
+    }).catch(console.log)
   }
 }
+
 
 export const fetchUser = (token) => {
   return dispatch => {

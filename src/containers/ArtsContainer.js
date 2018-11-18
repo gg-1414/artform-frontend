@@ -19,7 +19,6 @@ class ArtsContainer extends Component {
     fetch(`http://localhost:3000/api/v1/arts/${this.props.latestAuctionedArt.id}`)
       .then(res => res.json())
       .then(art => {
-        // const bidders = art.biddings.map(bidding => bidding.bidder_id)
         const bidders = art.biddings
         let uniqBidders = [];
         bidders.filter((item) => {
@@ -28,8 +27,7 @@ class ArtsContainer extends Component {
             uniqBidders.push({ bidder_id: item.bidder_id, bidder_name: item.bidder_name })
           }
         })
-        // console.log('uniqBidders:', uniqBidders); // => bidders: [1] (bidder ids)
-        // console.log('resArr:', resArr); // => [{bidder_id, bidder_name},{}]
+
         uniqBidders.forEach(bidder => {
           const data = {
             art_id: this.props.latestAuctionedArt.id,

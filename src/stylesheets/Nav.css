@@ -20,14 +20,16 @@ nav h1 a {
   color: black;
   margin-left: 15px;
   transition-duration: 0.5s;
+  /* font-size: 29px; */
 }
 
 nav h1 a:hover {
-  /* cursor: pointer; */
+  cursor: pointer;
   color: red;
+  /* text-shadow: 8px 0px 0px red; */
   filter: hue-rotate(285deg);
   /* font-size: 29px; */
-  letter-spacing: 5px;
+  letter-spacing: 4px;
 }
 
 nav span {
@@ -52,6 +54,7 @@ nav span a:hover {
   /* color: #222222; */
   letter-spacing: 2px;
   color: #c043aa;
+  /* filter: hue-rotate(285deg); */
 }
 
 #profile {
@@ -68,6 +71,8 @@ nav span a:hover {
   width: 41px;
   margin-top: 1px;
   background: #eca3f8;
+  /* background: yellow; */
   border-radius: 50px;
   border: 1px solid transparent;
+  /* filter: hue-rotate(285deg); */
 }
