@@ -1,9 +1,14 @@
 #arts-container {
   display: inline-block;
-  height: 590px;
-  /* width: 77%; */
+  height: 560px;
   width: 96%;
   float: right;
   overflow: scroll;
   padding: 15px;
+}
+
+@media screen and (max-width: 660px) {
+  #arts-container {
+    height: 620px;
+  }
 }

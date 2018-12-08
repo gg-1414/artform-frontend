@@ -92,7 +92,7 @@ class ArtShow extends Component {
         const timeNow = Date.now()
         const timeElapsedMS = timeNow - startTime
         const timeElapsedSEC = Math.floor(timeElapsedMS/1000)
-        this.setState({ timeLeft: 25 - parseInt(timeElapsedSEC) })
+        this.setState({ timeLeft: 20 - parseInt(timeElapsedSEC) })
       }
     }, 1000)
   }

@@ -213,3 +213,49 @@
   from { opacity: 0 }
   to { opacity: 1 }
 }
+
+@media screen and (max-width: 660px) {
+  .modal-content {
+    /* height: 305px; */
+    height: auto;
+    text-align: center;
+  }
+
+  #art-image img {
+    width: 85%;
+  }
+
+  #art-description {
+    padding: 0;
+    position: relative;
+    width: 85%;
+    text-align: left;
+    background: #1a1a1a;
+    margin-left: 32px;
+  }
+
+  .auction-state {
+    margin: 0;
+    padding: 6px 0;
+    width: 100%;
+    border-bottom: 1px solid #5e5e5e;
+  }
+
+  #art-description h2 {
+    margin: 0;
+    margin-left: 25px;
+    display: inline;
+    color: white;
+  }
+
+  #art-description h4 {
+    margin-left: 20px;
+    font-size: 37px;
+    color: white;
+    display: inline-block;
+  }
+
+  #auction {
+    display: none;
+  }
+}

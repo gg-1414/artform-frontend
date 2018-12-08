@@ -1,6 +1,6 @@
 .art-card {
   display: inline-block;
-  margin: 25px;
+  margin: 19px;
   /* transition-duration: 4s; */
 }
 
@@ -10,7 +10,7 @@
 
 .art-card img {
   width: auto;
-  height: 230px;
+  height: 220px;
   position: relative;
   border: 10px solid white;
   box-shadow: 0px 0px 17px #bebebe, 0 0 9px #3d3d3d;
@@ -35,4 +35,10 @@
   color: white;
   font-size: 18px;
   text-shadow: 0px 0px 8px #000000, 0 0 2px black;
+}
+
+@media screen and (max-width: 600px) {
+  .art-card img {
+    height: 150px;
+  }
 }
