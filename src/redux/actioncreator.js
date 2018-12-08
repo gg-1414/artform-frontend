@@ -8,7 +8,7 @@ export const setCurrentUserType = (userType) => {
 
 export const handleLogin = (typeOfUser, email, password) => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/users_auth', {
+    fetch('https://artform-backend.herokuapp.com/api/v1/users_auth', {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8"
@@ -24,7 +24,7 @@ export const handleLogin = (typeOfUser, email, password) => {
 
 export const handleArtistLogin = (email, password) => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/artists_auth', {
+    fetch('https://artform-backend.herokuapp.com/api/v1/artists_auth', {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8"
@@ -40,7 +40,7 @@ export const handleArtistLogin = (email, password) => {
 
 export const handleBidderLogin = (email, password) => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/bidders_auth', {
+    fetch('https://artform-backend.herokuapp.com/api/v1/bidders_auth', {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8"
@@ -67,7 +67,7 @@ export const handleBidderLogin = (email, password) => {
 
 export const fetchUser = (token) => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/current_bidder', {
+    fetch('https://artform-backend.herokuapp.com/api/v1/current_bidder', {
       method: "GET",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -94,7 +94,7 @@ export const removeCurrentUser = () => {
 
 export const fetchArts = () => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/arts')
+    fetch('https://artform-backend.herokuapp.com/api/v1/arts')
     .then(res => res.json())
     .then(arts => dispatch({
       type: "FETCH_ARTS", payload: arts
@@ -122,7 +122,7 @@ export const removeCurrentArt = () => {
 
 export const fetchAllBids = () => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/biddings')
+    fetch('https://artform-backend.herokuapp.com/api/v1/biddings')
       .then(res => res.json())
       .then(biddings => {
         dispatch({
@@ -134,7 +134,7 @@ export const fetchAllBids = () => {
 
 export const fetchBids = (artId) => {
   return dispatch => {
-    fetch(`http://localhost:3000/api/v1/arts/${artId}`)
+    fetch(`https://artform-backend.herokuapp.com/api/v1/arts/${artId}`)
       .then(res => res.json())
       .then(art => {
         dispatch({
@@ -179,7 +179,7 @@ export const removeWinner = () => {
 
 export const setBiddings = (artId) => {
   return dispatch => {
-    fetch('http://localhost:3000/api/v1/biddings')
+    fetch('https://artform-backend.herokuapp.com/api/v1/biddings')
       .then(res => res.json())
       .then(biddings => {
         const artBiddings = biddings.filter(bidding => {
@@ -194,7 +194,7 @@ export const setBiddings = (artId) => {
 
 export const getMessages = (bidderId) => {
   return dispatch => {
-    fetch(`http://localhost:3000/api/v1/bidders/${bidderId}`)
+    fetch(`https://artform-backend.herokuapp.com/api/v1/bidders/${bidderId}`)
       .then(res => res.json())
       .then(bidder => {
         return dispatch({

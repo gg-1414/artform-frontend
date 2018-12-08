@@ -70,7 +70,7 @@ class SignUp extends Component {
           img_url: this.state.imgUrl
         }
 
-        fetch('http://localhost:3000/api/v1/artists', {
+        fetch('https://artform-backend.herokuapp.com/api/v1/artists', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ class SignUp extends Component {
           name: this.state.name
         }
 
-        fetch('http://localhost:3000/api/v1/bidders', {
+        fetch('https://artform-backend.herokuapp.com/api/v1/bidders', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

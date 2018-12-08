@@ -18,7 +18,7 @@ class ArtShow extends Component {
       this.props.fetchUser(localStorage.token)
     }
 
-    fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`)
+    fetch(`https://artform-backend.herokuapp.com/api/v1/arts/${this.props.currentArt.id}`)
       .then(res => res.json())
       .then(art => {
         this.props.setCurrentArt(art)
@@ -37,7 +37,7 @@ class ArtShow extends Component {
         winner_id: this.props.winner[0].bidder_id
       }
 
-      fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`, {
+      fetch(`https://artform-backend.herokuapp.com/api/v1/arts/${this.props.currentArt.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -57,14 +57,14 @@ class ArtShow extends Component {
 
   getWinner = () => {
     let winner;
-    fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`)
+    fetch(`https://artform-backend.herokuapp.com/api/v1/arts/${this.props.currentArt.id}`)
       .then(res => res.json())
       .then(art => {
         winner = art.biddings.slice(-1)[0]
         this.props.setWinner(winner)
         return art
       }).then(res => {
-        return fetch(`http://localhost:3000/api/v1/arts/winner/${this.props.currentArt.id}`, {
+        return fetch(`https://artform-backend.herokuapp.com/api/v1/arts/winner/${this.props.currentArt.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -108,7 +108,7 @@ class ArtShow extends Component {
         start_time: Date.now()
       }
 
-      fetch(`http://localhost:3000/api/v1/arts/${this.props.currentArt.id}`, {
+      fetch(`https://artform-backend.herokuapp.com/api/v1/arts/${this.props.currentArt.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -129,7 +129,7 @@ class ArtShow extends Component {
       bid_amount: this.state.bidAmount
     }
 
-    fetch('http://localhost:3000/api/v1/biddings', {
+    fetch('https://artform-backend.herokuapp.com/api/v1/biddings', {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8"

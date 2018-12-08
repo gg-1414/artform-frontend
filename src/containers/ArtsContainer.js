@@ -16,7 +16,7 @@ class ArtsContainer extends Component {
   }
 
   postWinnerMessage = (winner) => {
-    fetch(`http://localhost:3000/api/v1/arts/${this.props.latestAuctionedArt.id}`)
+    fetch(`https://artform-backend.herokuapp.com/api/v1/arts/${this.props.latestAuctionedArt.id}`)
       .then(res => res.json())
       .then(art => {
         const bidders = art.biddings
@@ -38,7 +38,7 @@ class ArtsContainer extends Component {
             } won '${this.props.latestAuctionedArt.title}' at $${winner.bid_amount}`
           }
 
-          fetch('http://localhost:3000/api/v1/messages', {
+          fetch('https://artform-backend.herokuapp.com/api/v1/messages', {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
