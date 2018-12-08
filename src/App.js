@@ -25,6 +25,7 @@ class App extends Component {
         <Route path='/bidder/profile' component={BidderProfileContainer} />
         <Route path='/login' component={LogIn} />
         <Route path='/signup' component={SignUp} />
+        <Route exact path='/index' component={ArtsContainer} />
         <Route exact path='/' component={ArtsContainer} />
       </div>
     );
