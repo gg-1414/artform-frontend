@@ -2,6 +2,14 @@
 
 Live demo: https://artform-app.herokuapp.com/
 
+### Log in as a bidder by clicking "Bidder" 
+
+Email: juan@gmail.com
+
+Password: 123
+
+(Artist log in is currently still in progress.)
+
 ## Idea: 
 
 This comes from a personal problem. In college, I tried to sell my art to make some extra cash. I used a site called Society6, a platform that allows artists to sell their art, where they would handle the transactions as well as make the print and ship it. Sounds great and all, but I realized that I only made about 10% of the profits. An $18.99 print would leave me with about $2. 
