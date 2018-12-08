@@ -1,44 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Artform (Front-end) 
 
-## Available Scripts
+Live demo: https://artform-app.herokuapp.com/
 
-In the project directory, you can run:
+## Idea: 
 
-### `npm start`
+This comes from a personal problem. In college, I tried to sell my art to make some extra cash. I used a site called Society6, a platform that allows artists to sell their art, where they would handle the transactions as well as make the print and ship it. Sounds great and all, but I realized that I only made about 10% of the profits. An $18.99 print would leave me with about $2. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The idea behind this, my final project for the Flatiron Access Labs Coding Bootcamp, was to create a platform, completely user to user, without any extra fees. Maximum financial benefit for the artist. As well as a fun bidding atmosphere for the users, similar to Ebay. 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+For the purposes of showcasing my project, I have left the timer to run for 25 seconds count-down after the initial bid.
 
-### `npm test`
+## Solution: 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I have taken actual art done by myself and some of my old classmates/friends from when I attended FIT as an illustration major for the seed data. That's what the user first sees when opening up this app. 
 
-### `npm run build`
+After logging in is when users are able to interact and see details about the specific art.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This app is only interacting my own backend api, found here: https://github.com/gg-1414/artform-backend
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+The timer persists, even when a new user is viewing the same piece of art by comparing the start time (a post request to the art instance is made with the time after the initial bid) to the current time. Once that timer hits 0, the user with the highest bid wins the art. It is then taken out of the index page and moved to the winner's profile page. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to use this app: 
+1. Make sure you have PostgreSQL: https://www.postgresql.org/
+- Once you downloaded it, start the server.
 
-### `npm run eject`
+1. Clone the backend: https://github.com/gg-1414/artform-backend
+- Run in terminal: rails db:create
+- Then run: rails db:migrate 
+- Then run: rails db:seed
+- Then run: rails s 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Clone this repo. 
+- Run in terminal: npm start
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
