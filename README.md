@@ -33,12 +33,12 @@ The timer persists, even when a new user is viewing the same piece of art by com
 - Once you downloaded it, start the server.
 
 1. Clone the backend: https://github.com/gg-1414/artform-backend
-- Run in terminal: rails db:create
-- Then run: rails db:migrate 
-- Then run: rails db:seed
-- Then run: rails s 
+- Run in terminal: `rails db:create`
+- Then run: `rails db:migrate`
+- Then run: `rails db:seed`
+- Then run: `rails s` 
 
 2. Clone this repo. 
-- Run in terminal: npm start
+- Run in terminal: `npm start`
 
 
